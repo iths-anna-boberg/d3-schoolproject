@@ -9,11 +9,13 @@ async function renderLandskap(){
     const landskap = await d3.json('landskap.geojson')
     console.log(landskap)
 
-    
+    const center = d3.geoCentroid(landskap)
+
+
     const projection = d3
         .geoMercator()
-        .center([0, 50])  
-        .scale(width)
+        .center(center)  
+        .scale(width*1.8)
         .translate([ width/2, height/2 ])
 
     
