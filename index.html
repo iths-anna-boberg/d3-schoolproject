@@ -3,13 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style/style.css">
     <title>Map project</title>
 </head>
 <body>
-    <section class="map-container">
-        <svg id="sweden" width="700" height="800"></svg>
+    <main class="container">
+        <header><h1>Befolkning i Sveriges landskap</h1></header>
+        <section class="map-container">
+            <svg id="sweden" width="700" height="800"></svg>
 
-    </section>
+        </section>
+
+        <div class="tooltip">
+            <h3 id="landskapsnamn"></h3>
+            <article class="info">
+                <p>Totalbefolkning: <span id="total"></span></p>
+                <p>Antal män: <span id="men"></span></p>
+                <p>Antal kvinnor: <span id="women"></span></p>
+            </article>
+        </div>
+    </main>
 
     
     <script src="node_modules/d3/dist/d3.min.js"></script>

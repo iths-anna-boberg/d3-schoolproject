@@ -1,3 +1,35 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+}
 .map-container{
     padding: 2rem;
+}
+
+.tooltip{
+    z-index: 1;
+    position: fixed;
+    width: 200px;
+    background: white;
+    color: blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    visibility: hidden;
+    padding: 1rem;
+    -webkit-box-shadow: 10px 10px 18px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 18px -6px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 18px -6px rgba(0,0,0,0.75);
+}
+
+.tooltip.h3{
+    text-align: center;
 }

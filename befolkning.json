@@ -1,4 +1,4 @@
-let population = [
+[
 
     {"id":"Skåne", "info":[{"totalbefolkning":1375278,"män":686808,"kvinnor":688470}]},
     {"id":"Blekinge", "info":[{"totalbefolkning":159606,"män":81424,"kvinnor":78182}]},
@@ -26,83 +26,3 @@ let population = [
     {"id":"Lappland", "info":[{"totalbefolkning":89991,"män":46577,"kvinnor":43414}]},
     {"id":"Norrbotten", "info":[{"totalbefolkning":195769,"män":100072,"kvinnor":95697}]}
 ]
-
-
-
-function handleMouseOver(d){
-    d3.select(this).attr('fill', 'yellow')
-
-    const tooltip = document.querySelector('.tooltip')
-    tooltip.style.visibility = 'visible'
-    const header = document.querySelector('#landskapsnamn')
-    header.innerHTML = d.properties.landskap
-    const total = document.querySelector('#total')
-    const men = document.querySelector('#men')
-    const women = document.querySelector('#women')
-    let popStats = population.find(object => object.id === d.properties.landskap)
-    total.innerHTML = popStats.info[0].totalbefolkning
-    men.innerHTML = popStats.info[0].män
-    women.innerHTML = popStats.info[0].kvinnor
-
-}
-
-function handleMouseLeave(d){
-    d3.select(this).attr('fill', '#69b3a2')
-    
-    const tooltip = document.querySelector('.tooltip')
-    tooltip.style.visibility = 'hidden'
-}
-
-function followMouse(x,y){
-    const tooltip = document.querySelector(".tooltip")
-    tooltip.style.left = x + 'px'
-    tooltip.style.top = y + 'px'
-}
-
-// async function getPopulation(){
-//     let resp = await fetch('./befolkning.json');
-//     let pop = await resp.json();
-//     return pop;
-//     console.log(pop)
-
-//     for(let item of pop){
-//         console.log(item.id)
-//     }
-// }
-
-
-async function renderLandskap(){
-        
-    const svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
-
-    const landskap = await d3.json('landskap.geojson')
-    console.log(landskap)
-
-    const center = d3.geoCentroid(landskap)
-
-
-    const projection = d3
-        .geoMercator()
-        .center(center)  
-        .scale(width*1.8)
-        .translate([ width/2, height/2 ])
-
-    
-    svg.append("g")
-        .selectAll("path")
-        .data(landskap.features)
-        .enter().append("path")
-            .attr("fill", "#69b3a2")
-            .attr("d", d3.geoPath()
-                .projection(projection)
-            )
-            .style("stroke", "#fff")
-            .on('mouseover', handleMouseOver)
-            .on('mouseleave', handleMouseLeave)
-            .on('mousemove', ()=> followMouse(d3.event.clientX, d3.event.clientY))
-}
-
-
-renderLandskap()
